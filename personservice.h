@@ -10,5 +10,7 @@ private:
 public:
     personService();
     void add(Person p);
+    void printList();
+    void sortName();
 };
 #endif // PERSONSERVICE_H

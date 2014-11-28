@@ -19,5 +19,6 @@ public:
 };
 
 ostream& operator<< (ostream& out, const Person& p);
+bool operator<(const Person& lhs, const Person& rhs);
 
 #endif // PERSON_H

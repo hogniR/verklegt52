@@ -25,3 +25,9 @@ ostream& operator<< (ostream& out, const Person& p)
     return out;
 }
 
+
+
+bool operator< (const Person& lhs, const Person& rhs)
+{
+    return lhs.name < rhs.name;
+}
