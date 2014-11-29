@@ -9,3 +9,11 @@ personService::personService()
 void personService::add(Person p) {
     personRepository.add(p);
 }
+
+void personService::printList(){
+    personRepository.printList();
+}
+
+void personService::sortName(){
+    personRepository.sortName();
+}
