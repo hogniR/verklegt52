@@ -8,8 +8,10 @@ personRepo::personRepo(){
             while(!inFile.eof())
             {
                 Person p = Person();
-                inFile >> p.gender >> p.birthYear >> p.deathYear;
-                personList.push_back(p);
+                inFile >> p.name >>  p.gender >> p.birthYear >> p.deathYear;
+
+                if(p.name != "0")
+                    personList.push_back(p);
             }
             inFile.close();
         }

@@ -52,7 +52,9 @@ void ConsoleUI::start() {
         }
 
         else{
-            cout << "No such command" << endl;
+
+            if(inp != "quit")
+                cout << "No such command" << endl;
         }
     }while(inp != "quit");
 }
