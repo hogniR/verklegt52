@@ -2,6 +2,7 @@
 #define PERSONREPO_H
 
 #include <list>
+#include <functional>
 #include <fstream>
 #include "person.h"
 
@@ -17,6 +18,7 @@ public:
     void add(Person p);
     void printList();
     void sortName();
+    void Delete(string name);
 };
 
 #endif // PERSONREPO_H

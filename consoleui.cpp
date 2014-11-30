@@ -13,7 +13,7 @@ void ConsoleUI::start() {
     cout << "Welcome" << endl;
     do{
 
-        cout << "The commands are:\t add \t print \t quit" << endl;
+        cout << "The commands are:\t add \t print \t delete \t quit" << endl;
         cin >> inp;
 
         if(inp == "add") {
@@ -41,7 +41,17 @@ void ConsoleUI::start() {
             */
 
             personServ.printList();
-        } else{
+        }
+
+        else if(inp == "delete"){
+            string name;
+            cout << "Please enter a name to delete: " << endl;
+            cin >> name;
+
+            personServ.Delete(name);
+        }
+
+        else{
             cout << "No such command" << endl;
         }
     }while(inp != "quit");

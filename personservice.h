@@ -12,5 +12,6 @@ public:
     void add(Person p);
     void printList();
     void sortName();
+    void Delete(string name);
 };
 #endif // PERSONSERVICE_H

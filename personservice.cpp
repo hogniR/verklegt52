@@ -17,3 +17,7 @@ void personService::printList(){
 void personService::sortName(){
     personRepository.sortName();
 }
+
+void personService::Delete(string name){
+    personRepository.Delete(name);
+}
