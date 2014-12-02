@@ -12,6 +12,8 @@ public:
     void add(Person p);
     void printList();
     void sortName();
+    void Delete(string name);
+    void search(string name);
     void sortGender();
     void sortDyear();
     void sortByear();

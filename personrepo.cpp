@@ -1,18 +1,43 @@
 #include "personrepo.h"
 
-personRepo::personRepo()
-{
-    personList = list<Person>();
+personRepo::personRepo(){
+
+    ifstream inFile ("personList.txt");
+
+        if(inFile.is_open())
+        {
+            string line, name, gender;
+            int birth;
+
+            for(int i = 1; getline(inFile,line); i++)
+            {
+                if(i == 1)
+                    name = line;
+
+                if(i == 2)
+                    gender = line;
+
+                if(i == 3)
+                    birth = atoi(line.c_str());
+
+                if(i == 4){
+                    i = 0;
+
+                    Person p = Person(name, gender, birth,atoi(line.c_str()));
+                    personList.push_back(p);
+                    }
+            }
+            inFile.close();
+        }
 }
 
-personRepo::~personRepo()
-{
+personRepo::~personRepo(){
     ofstream file;
     file.open("personList.txt");
     file.clear();
     for(list<Person>::const_iterator it = personList.begin(); it != personList.end(); it++)
     {
-        file << *it << endl;
+        file << (*it).name << "\n" << (*it).gender << "\n" << (*it).birthYear << "\n" << (*it).deathYear << endl;
     }
     file.close();
 }
@@ -20,6 +45,55 @@ personRepo::~personRepo()
 void personRepo::add(Person p)
 {
     personList.push_back(p);
+}
+
+void personRepo::printList(){
+    for(list<Person>::const_iterator it = personList.begin(); it != personList.end(); it++)
+    {
+        cout << *it << endl;
+    }
+}
+
+void personRepo::Delete(string name) {
+
+    bool found = false;
+
+    if(name != "all"){
+        for(std::list<Person>::iterator it = personList.begin(); it != personList.end(); it++)
+        {
+            if((*it).name == name)
+            {
+                found = true;
+                personList.erase(it);
+                break;
+            }
+        }
+    }
+    else{ // if you input "all" then you delete all the list.
+        found = true;
+        for(std::list<Person>::iterator it = personList.begin(); it != personList.end(); it++)
+                personList.erase(it);
+    }
+
+    if(found == false)
+        cout << "The name was not found." << endl;
+}
+
+void personRepo::search(string name) {
+
+    bool found = false;
+    for(std::list<Person>::iterator it = personList.begin(); it != personList.end(); it++)
+    {
+        if((*it).name == name)
+        {
+            found = true;
+            cout << *it << endl;
+            break;
+        }
+    }
+
+    if(found == false)
+        cout << "The name was not found." << endl;
 }
 
 bool compareName(const Person lhs, const Person rhs){
@@ -57,12 +131,3 @@ void personRepo::sortDyear()
 {
     personList.sort(compareDeathyear);
 }
-
-void personRepo::printList()
-{
-    for(list<Person>::const_iterator it = personList.begin(); it != personList.end(); it++)
-    {
-        cout << *it << endl;
-    }
-}
-

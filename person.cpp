@@ -25,4 +25,3 @@ ostream& operator<< (ostream& out, const Person& p)
     return out;
 }
 
-

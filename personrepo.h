@@ -2,8 +2,11 @@
 #define PERSONREPO_H
 
 #include <list>
+#include <functional>
 #include <fstream>
 #include <string>
+#include <cstdlib>
+
 #include "person.h"
 
 using namespace std;
@@ -18,6 +21,8 @@ public:
     void add(Person p);
     void printList();
     void sortName();
+    void Delete(string name);
+    void search(string name);
     void sortGender();
     void sortByear();
     void sortDyear();
