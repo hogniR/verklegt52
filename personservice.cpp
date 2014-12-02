@@ -6,7 +6,7 @@ personService::personService()
     //personRepository = personRepo();
 }
 
-void personService::add(Person p) {
+void personService::add(Person p){
     personRepository.add(p);
 }
 
@@ -24,4 +24,16 @@ void personService::Delete(string name){
 
 void personService::search(string name){
     personRepository.search(name);
+}
+
+void personService::sortGender(){
+    personRepository.sortGender();
+}
+
+void personService::sortByear(){
+    personRepository.sortByear();
+}
+
+void personService::sortDyear(){
+    personRepository.sortDyear();
 }

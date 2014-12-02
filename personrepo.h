@@ -6,6 +6,7 @@
 #include <fstream>
 #include <string>
 #include <cstdlib>
+
 #include "person.h"
 
 using namespace std;
@@ -22,6 +23,11 @@ public:
     void sortName();
     void Delete(string name);
     void search(string name);
+    void sortGender();
+    void sortByear();
+    void sortDyear();
 };
+
+
 
 #endif // PERSONREPO_H
