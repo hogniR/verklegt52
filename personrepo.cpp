@@ -57,14 +57,22 @@ void personRepo::printList(){
 void personRepo::Delete(string name) {
 
     bool found = false;
-    for(std::list<Person>::iterator it = personList.begin(); it != personList.end(); it++)
-    {
-        if((*it).name == name)
+
+    if(name != "all"){
+        for(std::list<Person>::iterator it = personList.begin(); it != personList.end(); it++)
         {
-            found = true;
-            personList.erase(it);
-            break;
+            if((*it).name == name)
+            {
+                found = true;
+                personList.erase(it);
+                break;
+            }
         }
+    }
+    else{ // if you input "all" then you delete all the list.
+        found = true;
+        for(std::list<Person>::iterator it = personList.begin(); it != personList.end(); it++)
+                personList.erase(it);
     }
 
     if(found == false)
