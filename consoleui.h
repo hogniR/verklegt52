@@ -10,6 +10,10 @@ class ConsoleUI
 public:
     ConsoleUI();
     void start();
+    void add();
+    void print();
+    void deletePerson();
+    void search();
 private:
     personService personServ;
 };

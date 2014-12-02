@@ -96,19 +96,19 @@ void personRepo::search(string name) {
         cout << "The name was not found." << endl;
 }
 
-bool compareName(const Person lhs, const Person rhs){
+bool compareName(const Person& lhs, const Person& rhs){
     return lhs.name < rhs.name;
 }
 
-bool compareGender(const Person lhs, const Person rhs){
+bool compareGender(const Person& lhs, const Person& rhs){
     return lhs.gender < rhs.gender;
 }
 
-bool compareBirthyear(const Person lhs, const Person rhs){
+bool compareBirthyear(const Person& lhs, const Person& rhs){
     return lhs.birthYear < rhs.birthYear;
 }
 
-bool compareDeathyear(const Person lhs, const Person rhs){
+bool compareDeathyear(const Person& lhs, const Person& rhs){
     return lhs.deathYear < rhs.deathYear;
 }
 
