@@ -1,17 +1,31 @@
 #include "personrepo.h"
 
 personRepo::personRepo(){
-    personList = list<Person>();
+
     ifstream inFile ("personList.txt");
+
         if(inFile.is_open())
         {
-            while(!inFile.eof())
-            {
-                Person p = Person();
-                inFile >> p.name >>  p.gender >> p.birthYear >> p.deathYear;
+            string line, name, gender;
+            int birth;
 
-                if(p.name != "0")
+            for(int i = 1; getline(inFile,line); i++)
+            {
+                if(i == 1)
+                    name = line;
+
+                if(i == 2)
+                    gender = line;
+
+                if(i == 3)
+                    birth = atoi(line.c_str());
+
+                if(i == 4){
+                    i = 0;
+
+                    Person p = Person(name, gender, birth,atoi(line.c_str()));
                     personList.push_back(p);
+                    }
             }
             inFile.close();
         }
@@ -23,7 +37,7 @@ personRepo::~personRepo(){
     file.clear();
     for(list<Person>::const_iterator it = personList.begin(); it != personList.end(); it++)
     {
-        file << (*it).name << " " << (*it).gender << " " << (*it).birthYear << " " << (*it).deathYear << endl;
+        file << (*it).name << "\n" << (*it).gender << "\n" << (*it).birthYear << "\n" << (*it).deathYear << endl;
     }
     file.close();
 }
@@ -45,12 +59,34 @@ void personRepo::printList(){
 
 void personRepo::Delete(string name) {
 
+    bool found = false;
     for(std::list<Person>::iterator it = personList.begin(); it != personList.end(); it++)
     {
         if((*it).name == name)
         {
+            found = true;
             personList.erase(it);
             break;
         }
     }
+
+    if(found == false)
+        cout << "The name was not found." << endl;
+}
+
+void personRepo::search(string name) {
+
+    bool found = false;
+    for(std::list<Person>::iterator it = personList.begin(); it != personList.end(); it++)
+    {
+        if((*it).name == name)
+        {
+            found = true;
+            cout << *it << endl;
+            break;
+        }
+    }
+
+    if(found == false)
+        cout << "The name was not found." << endl;
 }

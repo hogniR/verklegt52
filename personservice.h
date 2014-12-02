@@ -13,5 +13,6 @@ public:
     void printList();
     void sortName();
     void Delete(string name);
+    void search(string name);
 };
 #endif // PERSONSERVICE_H

@@ -4,21 +4,28 @@ using namespace std;
 
 ConsoleUI::ConsoleUI()
 {
-    personServ = personService();
+    //personServ = personService();
 }
-
 
 void ConsoleUI::start() {
     string inp;
     cout << "Welcome" << endl;
     do{
 
-        cout << "The commands are:\t add \t print \t delete \t quit" << endl;
+        cout << "The commands are:\t add \t print \t delete \t search \t quit" << endl;
         cin >> inp;
 
         if(inp == "add") {
             Person p = Person();
-            cin >> p.name >> p.gender >> p.birthYear >> p.deathYear;
+            cout << "Enter name: ";
+            cin.sync();
+            getline(cin, p.name);
+            cout << "Enter gender: ";
+            getline(cin, p.gender);
+            cout << "Enter birthyear: ";
+            cin >> p.birthYear;
+            cout << "Enter deathyear: ";
+            cin >> p.deathYear;
 
             personServ.add(p);
         }
@@ -45,16 +52,24 @@ void ConsoleUI::start() {
 
         else if(inp == "delete"){
             string name;
-            cout << "Please enter a name to delete: " << endl;
-            cin >> name;
+            cout << "Please enter a name to delete: ";
+            cin.sync();
+            getline(cin, name);
 
             personServ.Delete(name);
         }
 
-        else{
+        else if(inp == "search"){
+            string name;
+            cout << "Please enter a name to search: ";
+            cin.sync();
+            getline(cin, name);
 
-            if(inp != "quit")
-                cout << "No such command" << endl;
+            personServ.search(name);
         }
+
+        else if(inp != "quit"){
+            cout << "No such command" << endl;
+            }
     }while(inp != "quit");
 }

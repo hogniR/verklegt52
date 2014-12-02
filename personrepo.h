@@ -4,6 +4,8 @@
 #include <list>
 #include <functional>
 #include <fstream>
+#include <string>
+#include <cstdlib>
 #include "person.h"
 
 using namespace std;
@@ -19,6 +21,7 @@ public:
     void printList();
     void sortName();
     void Delete(string name);
+    void search(string name);
 };
 
 #endif // PERSONREPO_H

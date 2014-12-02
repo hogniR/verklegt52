@@ -3,7 +3,7 @@
 
 personService::personService()
 {
-    personRepository = personRepo();
+    //personRepository = personRepo();
 }
 
 void personService::add(Person p) {
@@ -20,4 +20,8 @@ void personService::sortName(){
 
 void personService::Delete(string name){
     personRepository.Delete(name);
+}
+
+void personService::search(string name){
+    personRepository.search(name);
 }
