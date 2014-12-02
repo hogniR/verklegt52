@@ -10,7 +10,8 @@ ConsoleUI::ConsoleUI()
 void ConsoleUI::start()
 {
     string inp;
-    cout << "Welcome" << endl;
+    ifstream menu ("forsida.txt");
+    cout << menu.rdbuf() << endl;
     do{
 
         cout << endl << "The commands are: add, print, delete, search, quit" << endl;
