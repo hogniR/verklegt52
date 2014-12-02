@@ -9,7 +9,10 @@ class ConsoleUI
 {
 public:
     ConsoleUI();
+    //starts the interface for the software
     void start();
+
+    //functions to edit and display person list
     void add();
     void print();
     void deletePerson();

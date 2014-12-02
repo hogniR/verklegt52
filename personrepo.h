@@ -18,11 +18,13 @@ private:
 public:
     personRepo();
     ~personRepo();
+
     void add(Person p);
     void printList();
-    void sortName();
     void Delete(string name);
     void search(string name);
+
+    void sortName();
     void sortGender();
     void sortByear();
     void sortDyear();
