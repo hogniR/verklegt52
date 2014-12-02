@@ -3,6 +3,7 @@
 
 #include <list>
 #include <fstream>
+#include <string>
 #include "person.h"
 
 using namespace std;
@@ -17,6 +18,11 @@ public:
     void add(Person p);
     void printList();
     void sortName();
+    void sortGender();
+    void sortByear();
+    void sortDyear();
 };
+
+
 
 #endif // PERSONREPO_H

@@ -6,14 +6,32 @@ personService::personService()
     personRepository = personRepo();
 }
 
-void personService::add(Person p) {
+void personService::add(Person p)
+{
     personRepository.add(p);
 }
 
-void personService::printList(){
+void personService::printList()
+{
     personRepository.printList();
 }
 
-void personService::sortName(){
+void personService::sortName()
+{
     personRepository.sortName();
+}
+
+void personService::sortGender()
+{
+    personRepository.sortGender();
+}
+
+void personService::sortByear()
+{
+    personRepository.sortByear();
+}
+
+void personService::sortDyear()
+{
+    personRepository.sortDyear();
 }

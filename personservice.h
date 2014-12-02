@@ -12,5 +12,8 @@ public:
     void add(Person p);
     void printList();
     void sortName();
+    void sortGender();
+    void sortDyear();
+    void sortByear();
 };
 #endif // PERSONSERVICE_H
