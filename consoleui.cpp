@@ -9,7 +9,6 @@ ConsoleUI::ConsoleUI()
 
 void ConsoleUI::start()
 {
-    cout << "Hello" << endl;
     string inp;
     ifstream menu ("forsida.txt");
     cout << menu.rdbuf() << endl;
