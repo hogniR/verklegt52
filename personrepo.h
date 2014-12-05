@@ -6,6 +6,7 @@
 #include <fstream>
 #include <string>
 #include <cstdlib>
+#include <Qtsql>
 
 #include "person.h"
 
@@ -18,6 +19,7 @@ private:
 public:
     personRepo();
     ~personRepo();
+    QSqlDatabase db;
 
     void add(Person p);
     void printList();

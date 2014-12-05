@@ -88,12 +88,6 @@ void ConsoleUI::print(){
     int option;
 
     cout << "Please enter a number to sort by (1) Name, (2) Gender, (3) Birth Year or (4) Year of death" << endl;
-    cin >> option;
-
-    if(option == 1)
-    {
-        personServ.sortName();
-    }
 
     personServ.printList();
 

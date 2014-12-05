@@ -1,11 +1,10 @@
 #include "personrepo.h"
 
 personRepo::personRepo(){
-/*
-    QSqlDatabase db;
+
     db = QSqlDatabase::addDatabase("QSQLITE");
     QString dbName = "DB.sqlite";
-    db.setDatabaseName(dbName); */
+    db.setDatabaseName(dbName);
 }
 
 personRepo::~personRepo(){
@@ -34,16 +33,19 @@ void personRepo::add(Person p)
 }
 
 void personRepo::printList(){
-   /* QSqlQuery query;
-        query.exec("SELECT * FROM Car");
+
+    if(db.open())
+    {
+        QSqlQuery query;
+        query.exec("SELECT * FROM Computer");
 
         while(query.next()){
 
-        cout << query.value("Make").toString().toStdString() << " ";
-        cout << query.value("Model").toString().toStdString() << " ";
-        cout << query.value("Color").toString().toStdString() << endl;
+        cout << query.value("Name").toString().toStdString() << " ";
+        //cout << query.value("Year").toString().toStdString() << " ";
+        cout << query.value("Type").toString().toStdString() << endl;
         }
-    */
+    }
 }
 
 void personRepo::search(string name) {
