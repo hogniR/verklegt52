@@ -1,11 +1,11 @@
 #include "personrepo.h"
 
 personRepo::personRepo(){
-
+/*
     QSqlDatabase db;
     db = QSqlDatabase::addDatabase("QSQLITE");
     QString dbName = "DB.sqlite";
-    db.setDatabaseName(dbName);
+    db.setDatabaseName(dbName); */
 }
 
 personRepo::~personRepo(){
@@ -65,5 +65,5 @@ void personRepo::search(string name) {
 
 void personRepo::sortName()
 {
-    personList.sort(compareName);
+    //personList.sort(compareName);
 }

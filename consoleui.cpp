@@ -9,6 +9,7 @@ ConsoleUI::ConsoleUI()
 
 void ConsoleUI::start()
 {
+    cout << "Hello" << endl;
     string inp;
     ifstream menu ("forsida.txt");
     cout << menu.rdbuf() << endl;
@@ -23,9 +24,6 @@ void ConsoleUI::start()
         else if(inp == "print"){
             print();
         }
-        else if(inp == "delete"){ // if you input "all" then you delete all the list.
-            deletePerson();
-        }
         else if(inp == "search"){
             search();
         }
@@ -38,9 +36,8 @@ void ConsoleUI::start()
 void ConsoleUI::add(){
     Person p = Person();
     cout << "Enter name: ";
-    cin.ignore();
+    cin.sync();
     getline(cin, p.name);
-    cin.clear();
 
     //makes the first letter BIG.
     p.name[0] = toupper(p.name[0]);
@@ -96,15 +93,6 @@ void ConsoleUI::print(){
     if(option == 1)
     {
         personServ.sortName();
-    }
-    else if(option == 2){
-        personServ.sortGender();
-    }
-    else if(option == 3){
-        personServ.sortByear();
-    }
-    else if(option == 4){
-        personServ.sortDyear();
     }
 
     personServ.printList();
