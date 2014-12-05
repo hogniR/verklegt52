@@ -2,81 +2,48 @@
 
 personRepo::personRepo(){
 
-    ifstream inFile ("personList.txt");
-
-        if(inFile.is_open())
-        {
-            string line, name, gender;
-            int birth;
-
-            for(int i = 1; getline(inFile,line); i++)
-            {
-                if(i == 1)
-                    name = line;
-
-                if(i == 2)
-                    gender = line;
-
-                if(i == 3)
-                    birth = atoi(line.c_str());
-
-                if(i == 4){
-                    i = 0;
-
-                    Person p = Person(name, gender, birth,atoi(line.c_str()));
-                    personList.push_back(p);
-                    }
-            }
-            inFile.close();
-        }
+    QSqlDatabase db;
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    QString dbName = "DB.sqlite";
+    db.setDatabaseName(dbName);
 }
 
 personRepo::~personRepo(){
-    ofstream file;
-    file.open("personList.txt");
-    file.clear();
-    for(list<Person>::const_iterator it = personList.begin(); it != personList.end(); it++)
-    {
-        file << (*it).name << "\n" << (*it).gender << "\n" << (*it).birthYear << "\n" << (*it).deathYear << endl;
-    }
-    file.close();
+
 }
 
 void personRepo::add(Person p)
 {
-    personList.push_back(p);
+    /*
+    if(db.open())
+    {
+        string make, model, color;
+
+        cout << "Make: ";
+        cin >> make;
+        cout << "Model: ";
+        cin >> model;
+        cout << "Color: ";
+        cin >> color;
+
+        QSqlQuery query;
+        query.exec("INSERT INTO Car('Make','Model','Color','Doors') VALUES ('" + QString(make.c_str()) + "','" +QString(model.c_str()) + "', '" + QString(color.c_str()) + "', 5)");
+
+        db.close();
+        */
 }
 
 void personRepo::printList(){
-    for(list<Person>::const_iterator it = personList.begin(); it != personList.end(); it++)
-    {
-        cout << *it << endl;
-    }
-}
+   /* QSqlQuery query;
+        query.exec("SELECT * FROM Car");
 
-void personRepo::Delete(string name) {
+        while(query.next()){
 
-    bool found = false;
-
-    if(name != "all"){
-        for(std::list<Person>::iterator it = personList.begin(); it != personList.end(); it++)
-        {
-            if((*it).name == name)
-            {
-                found = true;
-                personList.erase(it);
-                break;
-            }
+        cout << query.value("Make").toString().toStdString() << " ";
+        cout << query.value("Model").toString().toStdString() << " ";
+        cout << query.value("Color").toString().toStdString() << endl;
         }
-    }
-    else{ // if you input "all" then you delete all the list.
-        found = true;
-        for(std::list<Person>::iterator it = personList.begin(); it != personList.end(); it++)
-                personList.erase(it);
-    }
-
-    if(found == false)
-        cout << "The name was not found." << endl;
+    */
 }
 
 void personRepo::search(string name) {
@@ -96,38 +63,7 @@ void personRepo::search(string name) {
         cout << "The name was not found." << endl;
 }
 
-bool compareName(const Person& lhs, const Person& rhs){
-    return lhs.name < rhs.name;
-}
-
-bool compareGender(const Person& lhs, const Person& rhs){
-    return lhs.gender < rhs.gender;
-}
-
-bool compareBirthyear(const Person& lhs, const Person& rhs){
-    return lhs.birthYear < rhs.birthYear;
-}
-
-bool compareDeathyear(const Person& lhs, const Person& rhs){
-    return lhs.deathYear < rhs.deathYear;
-}
-
 void personRepo::sortName()
 {
     personList.sort(compareName);
-}
-
-void personRepo::sortGender()
-{
-    personList.sort(compareGender);
-}
-
-void personRepo::sortByear()
-{
-    personList.sort(compareBirthyear);
-}
-
-void personRepo::sortDyear()
-{
-    personList.sort(compareDeathyear);
 }

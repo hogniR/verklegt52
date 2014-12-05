@@ -18,22 +18,6 @@ void personService::sortName(){
     personRepository.sortName();
 }
 
-void personService::Delete(string name){
-    personRepository.Delete(name);
-}
-
 void personService::search(string name){
     personRepository.search(name);
-}
-
-void personService::sortGender(){
-    personRepository.sortGender();
-}
-
-void personService::sortByear(){
-    personRepository.sortByear();
-}
-
-void personService::sortDyear(){
-    personRepository.sortDyear();
 }

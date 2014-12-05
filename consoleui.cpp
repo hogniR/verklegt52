@@ -38,8 +38,9 @@ void ConsoleUI::start()
 void ConsoleUI::add(){
     Person p = Person();
     cout << "Enter name: ";
-    cin.sync();
+    cin.ignore();
     getline(cin, p.name);
+    cin.clear();
 
     //makes the first letter BIG.
     p.name[0] = toupper(p.name[0]);
@@ -52,7 +53,9 @@ void ConsoleUI::add(){
     do // you can only enter male or female
     {
         cout << "Enter gender: ";
+        cin.ignore();
         getline(cin, p.gender);
+        cin.clear();
 
         p.gender[0] = toupper(p.gender[0]);
         if(p.gender.length() <= 5)
@@ -108,20 +111,12 @@ void ConsoleUI::print(){
 
 }
 
-void ConsoleUI::deletePerson(){
-    string name;
-    cout << "Please enter a name to delete: ";
-    cin.sync();
-    getline(cin, name);
-
-    personServ.Delete(name);
-}
-
 void ConsoleUI::search(){
     string name;
     cout << "Please enter a name to search: ";
-    cin.sync();
+    cin.ignore();
     getline(cin, name);
+    cin.clear();
 
     personServ.search(name);
 }
