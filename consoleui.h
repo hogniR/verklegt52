@@ -17,6 +17,8 @@ public:
     void print();
     void deletePerson();
     void search();
+    void add_person();
+    void add_computer();
 private:
     personService personServ;
 };

@@ -11,25 +11,30 @@ personRepo::~personRepo(){
 
 }
 
-void personRepo::add(Person p)
-{
-    /*
+void personRepo::add(Person p){
     if(db.open())
     {
-        string make, model, color;
-
-        cout << "Make: ";
-        cin >> make;
-        cout << "Model: ";
-        cin >> model;
-        cout << "Color: ";
-        cin >> color;
-
         QSqlQuery query;
-        query.exec("INSERT INTO Car('Make','Model','Color','Doors') VALUES ('" + QString(make.c_str()) + "','" +QString(model.c_str()) + "', '" + QString(color.c_str()) + "', 5)");
+        query.exec("INSERT INTO Person('Name','Gender','birthYear','deathYear')"
+                   "VALUES('"+QString((p.name).c_str())+"',"
+                   "'" +QString((p.gender).c_str())+"', "+QString::number(p.birthYear)+","
+                   " "+QString::number(p.deathYear)+")");
 
         db.close();
-        */
+    }
+}
+
+void personRepo::add_computer(Computer c){
+    if(db.open())
+    {
+        QSqlQuery query;
+        query.exec("INSERT INTO Computer('Name','Year','Type','Made')"
+                   "VALUES('"+QString((c.name).c_str())+"',"
+                   " "+QString::number(c.year)+", '"+QString((c.type).c_str())+"',"
+                   " "+QString::number(c.made)+")");
+
+        db.close();
+    }
 }
 
 void personRepo::printList(){
@@ -46,6 +51,7 @@ void personRepo::printList(){
         cout << query.value("Type").toString().toStdString() << endl;
         }
     }
+    db.close();
 }
 
 void personRepo::search(string name) {

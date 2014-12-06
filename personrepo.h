@@ -9,6 +9,7 @@
 #include <Qtsql>
 
 #include "person.h"
+#include "computer.h"
 
 using namespace std;
 
@@ -22,6 +23,7 @@ public:
     QSqlDatabase db;
 
     void add(Person p);
+    void add_computer(Computer c);
     void printList();
     void Delete(string name);
     void search(string name);

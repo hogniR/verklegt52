@@ -14,7 +14,7 @@ void ConsoleUI::start()
     cout << menu.rdbuf() << endl;
     do{
 
-        cout << endl << "The commands are: add, print, delete, search, quit" << endl;
+        cout << endl << "The commands are: add, print, search, quit" << endl;
         cin >> inp;
 
         if(inp == "add"){
@@ -33,7 +33,39 @@ void ConsoleUI::start()
 }
 
 void ConsoleUI::add(){
+    string inp;
+
+    cout << "Want to add a person or computer: ";
+    cin >> inp;
+
+    if(inp == "person")
+        add_person();
+    else if(inp == "computer")
+        add_computer();
+}
+
+void ConsoleUI::print(){
+    //int option;
+
+    cout << "Please enter a number to sort by (1) Name, (2) Gender, (3) Birth Year or (4) Year of death" << endl;
+
+    personServ.printList();
+
+}
+
+void ConsoleUI::search(){
+    string name;
+    cout << "Please enter a name to search: ";
+    cin.ignore();
+    getline(cin, name);
+    cin.clear();
+
+    personServ.search(name);
+}
+
+void ConsoleUI::add_person(){
     Person p = Person();
+
     cout << "Enter name: ";
     cin.sync();
     getline(cin, p.name);
@@ -49,9 +81,8 @@ void ConsoleUI::add(){
     do // you can only enter male or female
     {
         cout << "Enter gender: ";
-        cin.ignore();
+        cin.sync();;
         getline(cin, p.gender);
-        cin.clear();
 
         p.gender[0] = toupper(p.gender[0]);
         if(p.gender.length() <= 5)
@@ -83,21 +114,21 @@ void ConsoleUI::add(){
     personServ.add(p);
 }
 
-void ConsoleUI::print(){
-    int option;
+void ConsoleUI::add_computer(){
+    Computer c = Computer();
 
-    cout << "Please enter a number to sort by (1) Name, (2) Gender, (3) Birth Year or (4) Year of death" << endl;
+    cout << "Enter name: ";
+    cin.sync();
+    getline(cin, c.name);
 
-    personServ.printList();
+    cout << "Enter Year: ";
+    cin >> c.year;
 
-}
+    cout << "Enter type: ";
+    cin >> c.type;
 
-void ConsoleUI::search(){
-    string name;
-    cout << "Please enter a name to search: ";
-    cin.ignore();
-    getline(cin, name);
-    cin.clear();
+    cout << "Was it made? (1 or 0): ";
+    cin >> c.made;
 
-    personServ.search(name);
+    personServ.add_computer(c);
 }

@@ -19,10 +19,12 @@ SOURCES += main.cpp \
     person.cpp \
     personrepo.cpp \
     personservice.cpp \
-    consoleui.cpp
+    consoleui.cpp \
+    computer.cpp
 
 HEADERS += \
     person.h \
     personrepo.h \
     personservice.h \
-    consoleui.h
+    consoleui.h \
+    computer.h

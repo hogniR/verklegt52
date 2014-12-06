@@ -10,6 +10,7 @@ private:
 public:
     personService();
     void add(Person p);
+    void add_computer(Computer c);
     void printList();
     void search(string name);
     void sortName();

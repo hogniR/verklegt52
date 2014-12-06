@@ -10,6 +10,10 @@ void personService::add(Person p){
     personRepository.add(p);
 }
 
+void personService::add_computer(Computer c){
+    personRepository.add_computer(c);
+}
+
 void personService::printList(){
     personRepository.printList();
 }
