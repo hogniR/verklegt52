@@ -12,48 +12,60 @@ void ConsoleUI::start()
     string inp;
     ifstream menu ("forsida.txt");
     cout << menu.rdbuf() << endl;
-    do{
-
+    do
+    {
         cout << endl << "The commands are: add, print, search, quit" << endl;
         cin >> inp;
 
-        if(inp == "add"){
+        if(inp == "add")
+        {
             add();
         }
-        else if(inp == "print"){
+        else if(inp == "print")
+        {
             print();
         }
-        else if(inp == "search"){
+        else if(inp == "search")
+        {
             search();
         }
-        else if(inp != "quit"){
+        else if(inp != "quit")
+        {
             cout << "No such command" << endl;
         }
     }while(inp != "quit");
 }
 
-void ConsoleUI::add(){
+void ConsoleUI::add()
+{
     string inp;
 
-    cout << "Want to add a person or computer: ";
+    cout << "Do you want  to add a (p)erson or a (c)omputer?: ";
     cin >> inp;
 
-    if(inp == "person")
+    if(inp == "p")
         add_person();
-    else if(inp == "computer")
+    else if(inp == "c")
         add_computer();
 }
 
-void ConsoleUI::print(){
-    //int option;
-
+void ConsoleUI::print()
+{
+    int option;
     cout << "Please enter a number to sort by (1) Name, (2) Gender, (3) Birth Year or (4) Year of death" << endl;
+    cin >> option;
 
-    personServ.printList();
+    while(option < 1 || option > 4)
+    {
+        cout << "Invalid option selected, please try again." << endl;
+        cin >> option;
+    }
+    personServ.printList(option);
 
 }
 
-void ConsoleUI::search(){
+void ConsoleUI::search()
+{
     string name;
     cout << "Please enter a name to search: ";
     cin.ignore();
@@ -63,7 +75,8 @@ void ConsoleUI::search(){
     personServ.search(name);
 }
 
-void ConsoleUI::add_person(){
+void ConsoleUI::add_person()
+{
     Person p = Person();
 
     cout << "Enter name: ";
@@ -114,7 +127,8 @@ void ConsoleUI::add_person(){
     personServ.add(p);
 }
 
-void ConsoleUI::add_computer(){
+void ConsoleUI::add_computer()
+{
     Computer c = Computer();
 
     cout << "Enter name: ";

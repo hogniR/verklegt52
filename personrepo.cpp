@@ -7,10 +7,6 @@ personRepo::personRepo(){
     db.setDatabaseName(dbName);
 }
 
-personRepo::~personRepo(){
-
-}
-
 void personRepo::add(Person p){
     if(db.open())
     {
@@ -37,41 +33,66 @@ void personRepo::add_computer(Computer c){
     }
 }
 
-void personRepo::printList(){
+void personRepo::printList(int option)
+{
+    QString queryExec;
+    switch(option)
+    {
+        case 1:
+            queryExec = "SELECT * FROM Person ORDER BY Name";
+            break;
+        case 2:
+            queryExec = "SELECT * FROM Person ORDER BY Gender";
+            break;
+        case 3:
+            queryExec = "SELECT * FROM Person ORDER BY birthYear";
+            break;
+        case 4:
+            queryExec = "SELECT * FROM Person ORDER BY deathYear";
+            break;
+    }
 
     if(db.open())
     {
         QSqlQuery query;
-        query.exec("SELECT * FROM Computer");
+        query.exec(queryExec);
 
-        while(query.next()){
-
-        cout << query.value("Name").toString().toStdString() << " ";
-        //cout << query.value("Year").toString().toStdString() << " ";
-        cout << query.value("Type").toString().toStdString() << endl;
+        while(query.next())
+        {
+            cout << "Name:          " << query.value("Name").toString().toStdString() << endl;
+            cout << "Gender:        " << query.value("Gender").toString().toStdString() << endl;
+            cout << "Birth year:    " << query.value("birthYear").toString().toStdString() << endl;
+            cout << "Year of death: " << query.value("deathYear").toString().toStdString() << endl;
+            cout << endl;
         }
     }
     db.close();
 }
 
-void personRepo::search(string name) {
-
-    bool found = false;
-    for(std::list<Person>::iterator it = personList.begin(); it != personList.end(); it++)
+void personRepo::search(string name)
+{
+    if(db.open())
     {
-        if((*it).name == name)
+        QSqlQuery query;
+        query.exec("SELECT * FROM Person WHERE Name = '" + QString(name.c_str()) + "'");
+        if(query.next() != false)
         {
-            found = true;
-            cout << *it << endl;
-            break;
+            query.previous();
+            while(query.next())
+            {
+                cout << endl;
+                cout << "Name:          " << query.value("Name").toString().toStdString() << endl;
+                cout << "Gender:        " << query.value("Gender").toString().toStdString() << endl;
+                cout << "Birth year:    " << query.value("birthYear").toString().toStdString() << endl;
+                cout << "Year of death: " << query.value("deathYear").toString().toStdString() << endl;
+                cout << endl;
+            }
+        }
+        else
+        {
+            cout << "No matches found" << endl;
         }
     }
-
-    if(found == false)
-        cout << "The name was not found." << endl;
+    db.close();
 }
 
-void personRepo::sortName()
-{
-    //personList.sort(compareName);
-}

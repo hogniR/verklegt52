@@ -16,24 +16,15 @@ using namespace std;
 class personRepo
 {
 private:
-    list<Person> personList;
+    QSqlDatabase db;
 public:
     personRepo();
-    ~personRepo();
-    QSqlDatabase db;
 
     void add(Person p);
     void add_computer(Computer c);
-    void printList();
-    void Delete(string name);
+    void printList(int option);
     void search(string name);
 
-    void sortName();
-    void sortGender();
-    void sortByear();
-    void sortDyear();
 };
-
-
 
 #endif // PERSONREPO_H

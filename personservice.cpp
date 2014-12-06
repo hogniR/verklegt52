@@ -14,13 +14,10 @@ void personService::add_computer(Computer c){
     personRepository.add_computer(c);
 }
 
-void personService::printList(){
-    personRepository.printList();
+void personService::printList(int option){
+    personRepository.printList(option);
 }
 
-void personService::sortName(){
-    personRepository.sortName();
-}
 
 void personService::search(string name){
     personRepository.search(name);

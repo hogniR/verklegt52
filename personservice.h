@@ -11,8 +11,7 @@ public:
     personService();
     void add(Person p);
     void add_computer(Computer c);
-    void printList();
+    void printList(int option);
     void search(string name);
-    void sortName();
 };
 #endif // PERSONSERVICE_H

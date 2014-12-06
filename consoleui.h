@@ -15,7 +15,6 @@ public:
     //functions to edit and display person list
     void add();
     void print();
-    void deletePerson();
     void search();
     void add_person();
     void add_computer();
