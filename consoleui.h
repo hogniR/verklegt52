@@ -3,7 +3,9 @@
 
 #include <string>
 #include <iostream>
+#include <fstream>
 #include "personservice.h"
+#include "computerservice.h"
 
 class ConsoleUI
 {
@@ -14,12 +16,20 @@ public:
 
     //functions to edit and display person list
     void add();
+    void addPerson();
+    void addComputer();
+
     void print();
+    void printPersons();
+    void printComputers();
+
     void search();
-    void add_person();
-    void add_computer();
+    void searchPerson();
+    void searchComputer();
+
 private:
     personService personServ;
+    computerService computerServ;
 };
 
 

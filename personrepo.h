@@ -1,15 +1,11 @@
 #ifndef PERSONREPO_H
 #define PERSONREPO_H
 
-#include <list>
 #include <functional>
-#include <fstream>
-#include <string>
 #include <cstdlib>
 #include <Qtsql>
 
 #include "person.h"
-#include "computer.h"
 
 using namespace std;
 
@@ -21,9 +17,8 @@ public:
     personRepo();
 
     void add(Person p);
-    void add_computer(Computer c);
-    void printList(int option);
-    void search(string name);
+    QSqlQuery printList(int option);
+    QSqlQuery search(string name);
 
 };
 
