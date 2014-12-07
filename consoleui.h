@@ -16,6 +16,7 @@ public:
     void add();
     void print();
     void search();
+    void connect();
     void add_person();
     void add_computer();
 private:

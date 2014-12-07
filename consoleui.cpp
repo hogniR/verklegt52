@@ -14,7 +14,7 @@ void ConsoleUI::start()
     cout << menu.rdbuf() << endl;
     do
     {
-        cout << endl << "The commands are: add, print, search, quit" << endl;
+        cout << endl << "The commands are: add, print, search, quit, connect" << endl;
         cin >> inp;
 
         if(inp == "add")
@@ -28,6 +28,10 @@ void ConsoleUI::start()
         else if(inp == "search")
         {
             search();
+        }
+        else if(inp == "connect")
+        {
+            connect();
         }
         else if(inp != "quit")
         {
@@ -145,4 +149,19 @@ void ConsoleUI::add_computer()
     cin >> c.made;
 
     personServ.add_computer(c);
+}
+
+void ConsoleUI::connect()
+{
+    string name, computer;
+    cout << "Please enter a name to connect: ";
+    cin.ignore();
+    getline(cin, name);
+    cin.clear();
+
+    cout << "Please enter a computer to connect: ";
+    getline(cin, computer);
+    cin.clear();
+
+    personServ.connect(name, computer);
 }

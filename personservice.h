@@ -13,5 +13,6 @@ public:
     void add_computer(Computer c);
     void printList(int option);
     void search(string name);
+    void connect(string name, string computer);
 };
 #endif // PERSONSERVICE_H

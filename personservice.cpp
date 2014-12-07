@@ -22,3 +22,7 @@ void personService::printList(int option){
 void personService::search(string name){
     personRepository.search(name);
 }
+
+void personService::connect(string name, string computer){
+    personRepository.connect(name, computer);
+}

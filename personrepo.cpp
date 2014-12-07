@@ -96,3 +96,22 @@ void personRepo::search(string name)
     db.close();
 }
 
+void personRepo::connect(string name, string computer)
+{
+    if(db.open())
+    {
+        QSqlQuery query;
+        query.exec("SELECT ID FROM Person WHERE Name = '" + QString(name.c_str()) + "'");
+        if(query.next() != false)
+        {
+            QString id = query.value("ID").toString();
+
+            cout << id.toStdString() << endl;
+        }
+    }
+    else
+    {
+        cout << "Could not connect." << endl;
+    }
+}
+
