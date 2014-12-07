@@ -1,13 +1,14 @@
 #include "personrepo.h"
 
-personRepo::personRepo(){
-
+personRepo::personRepo()
+{
     db = QSqlDatabase::addDatabase("QSQLITE");
     QString dbName = "DB.sqlite";
     db.setDatabaseName(dbName);
 }
 
-void personRepo::add(Person p){
+void personRepo::add(Person p)
+{
     if(db.open())
     {
         QSqlQuery query;
@@ -15,25 +16,11 @@ void personRepo::add(Person p){
                    "VALUES('"+QString((p.name).c_str())+"',"
                    "'" +QString((p.gender).c_str())+"', "+QString::number(p.birthYear)+","
                    " "+QString::number(p.deathYear)+")");
-
-        db.close();
     }
+    db.close();
 }
 
-void personRepo::add_computer(Computer c){
-    if(db.open())
-    {
-        QSqlQuery query;
-        query.exec("INSERT INTO Computer('Name','Year','Type','Made')"
-                   "VALUES('"+QString((c.name).c_str())+"',"
-                   " "+QString::number(c.year)+", '"+QString((c.type).c_str())+"',"
-                   " "+QString::number(c.made)+")");
-
-        db.close();
-    }
-}
-
-void personRepo::printList(int option)
+QSqlQuery personRepo::printList(int option)
 {
     QString queryExec;
     switch(option)
@@ -57,61 +44,62 @@ void personRepo::printList(int option)
         QSqlQuery query;
         query.exec(queryExec);
 
-        while(query.next())
-        {
-            cout << "Name:          " << query.value("Name").toString().toStdString() << endl;
-            cout << "Gender:        " << query.value("Gender").toString().toStdString() << endl;
-            cout << "Birth year:    " << query.value("birthYear").toString().toStdString() << endl;
-            cout << "Year of death: " << query.value("deathYear").toString().toStdString() << endl;
-            cout << endl;
-        }
-    }
-    db.close();
-}
-
-void personRepo::search(string name)
-{
-    if(db.open())
-    {
-        QSqlQuery query;
-        query.exec("SELECT * FROM Person WHERE Name = '" + QString(name.c_str()) + "'");
-        if(query.next() != false)
+        if(query.next())
         {
             query.previous();
-            while(query.next())
-            {
-                cout << endl;
-                cout << "Name:          " << query.value("Name").toString().toStdString() << endl;
-                cout << "Gender:        " << query.value("Gender").toString().toStdString() << endl;
-                cout << "Birth year:    " << query.value("birthYear").toString().toStdString() << endl;
-                cout << "Year of death: " << query.value("deathYear").toString().toStdString() << endl;
-                cout << endl;
-            }
-        }
-        else
-        {
-            cout << "No matches found" << endl;
+            return query;
         }
     }
     db.close();
+    return QSqlQuery();
 }
 
-void personRepo::connect(string name, string computer)
+QSqlQuery personRepo::search(string name)
 {
     if(db.open())
     {
         QSqlQuery query;
-        query.exec("SELECT ID FROM Person WHERE Name = '" + QString(name.c_str()) + "'");
-        if(query.next() != false)
+        query.exec("SELECT * FROM Person WHERE Name LIKE '%" + QString(name.c_str()) + "%'");
+        if(query.next())
         {
-            QString id = query.value("ID").toString();
-
-            cout << id.toStdString() << endl;
+            query.previous();
+            return query;
         }
     }
-    else
+    db.close();
+    return QSqlQuery();
+}
+
+//PRAGMA foreign_keys = ON
+bool personRepo::connect(string name, string computer)
+{
+    bool found = false;
+
+    if(db.open())
     {
-        cout << "Could not connect." << endl;
+        QSqlQuery query;
+        query.exec("SELECT * FROM Person WHERE Name LIKE '%" + QString(name.c_str()) + "%'");
+
+        if(query.next())
+        {
+            QString id_p = query.value("ID").toString();
+            found = true;
+
+            query.exec("SELECT * FROM Computer WHERE Name LIKE '%" + QString(computer.c_str()) + "%'");
+
+            if(query.next())
+            {
+                QString id_c = query.value("ID").toString();
+                query.exec("INSERT INTO Connector(p_ID, c_ID) VALUES("+ id_p +", "+ id_c +")");
+            }
+            else
+                found = false;
+        }
+        else
+            found = false;
     }
+    return found;
+
+    db.close();
 }
 

@@ -1,28 +1,20 @@
 #include "personservice.h"
-#include "person.h"
 
-personService::personService()
+void personService::add(Person p)
 {
-    //personRepository = personRepo();
-}
-
-void personService::add(Person p){
     personRepository.add(p);
 }
 
-void personService::add_computer(Computer c){
-    personRepository.add_computer(c);
+QSqlQuery personService::printList(int option)
+{
+    return personRepository.printList(option);
 }
 
-void personService::printList(int option){
-    personRepository.printList(option);
+QSqlQuery personService::search(string name)
+{
+    return personRepository.search(name);
 }
 
-
-void personService::search(string name){
-    personRepository.search(name);
-}
-
-void personService::connect(string name, string computer){
-    personRepository.connect(name, computer);
+bool personService::connect(string name, string computer){
+    return personRepository.connect(name, computer);
 }

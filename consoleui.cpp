@@ -44,42 +44,16 @@ void ConsoleUI::add()
 {
     string inp;
 
-    cout << "Do you want  to add a (p)erson or a (c)omputer?: ";
+    cout << "Do you want to add a (p)erson or a (c)omputer?: ";
     cin >> inp;
 
     if(inp == "p")
-        add_person();
+        addPerson();
     else if(inp == "c")
-        add_computer();
+        addComputer();
 }
 
-void ConsoleUI::print()
-{
-    int option;
-    cout << "Please enter a number to sort by (1) Name, (2) Gender, (3) Birth Year or (4) Year of death" << endl;
-    cin >> option;
-
-    while(option < 1 || option > 4)
-    {
-        cout << "Invalid option selected, please try again." << endl;
-        cin >> option;
-    }
-    personServ.printList(option);
-
-}
-
-void ConsoleUI::search()
-{
-    string name;
-    cout << "Please enter a name to search: ";
-    cin.ignore();
-    getline(cin, name);
-    cin.clear();
-
-    personServ.search(name);
-}
-
-void ConsoleUI::add_person()
+void ConsoleUI::addPerson()
 {
     Person p = Person();
 
@@ -131,7 +105,7 @@ void ConsoleUI::add_person()
     personServ.add(p);
 }
 
-void ConsoleUI::add_computer()
+void ConsoleUI::addComputer()
 {
     Computer c = Computer();
 
@@ -148,7 +122,146 @@ void ConsoleUI::add_computer()
     cout << "Was it made? (1 or 0): ";
     cin >> c.made;
 
-    personServ.add_computer(c);
+   computerServ.add(c);
+}
+
+void ConsoleUI::print()
+{
+    string inp;
+
+    cout << "Do you want to print a list of (p)ersons or (c)omputers?: ";
+    cin >> inp;
+
+    if(inp == "p")
+        printPersons();
+    else if(inp == "c")
+        printComputers();
+}
+
+void ConsoleUI::printPersons()
+{
+    int option;
+    cout << "Please enter a number to sort by (1) Name, (2) Gender, (3) Birth Year or (4) Year of death" << endl;
+    cin >> option;
+
+    while(option < 1 || option > 4)
+    {
+        cout << "Invalid option selected, please try again." << endl;
+        cin >> option;
+    }
+    QSqlQuery query = personServ.printList(option);
+    while(query.next())
+    {
+        cout << "Name:          " << query.value("Name").toString().toStdString() << endl;
+        cout << "Gender:        " << query.value("Gender").toString().toStdString() << endl;
+        cout << "Birth year:    " << query.value("birthYear").toString().toStdString() << endl;
+        cout << "Year of death: " << query.value("deathYear").toString().toStdString() << endl;
+        cout << endl;
+    }
+}
+
+void ConsoleUI::printComputers()
+{
+    int option;
+    cout << "Please enter a number to sort by (1) Name, (2) Year, (3) Type or (4) if it was Made" << endl;
+    cin >> option;
+
+    while(option < 1 || option > 4)
+    {
+        cout << "Invalid option selected, please try again." << endl;
+        cin >> option;
+    }
+    QSqlQuery query = computerServ.printList(option);
+    while(query.next())
+    {
+        cout << "Name:          " << query.value("Name").toString().toStdString() << endl;
+        cout << "Year:          " << query.value("Year").toString().toStdString() << endl;
+        cout << "Type:          " << query.value("Type").toString().toStdString() << endl;
+        string made;
+        if(query.value("Made") == 0)
+            made = "No";
+        else
+            made = "Yes";
+
+        cout << "It was made:   " << made << endl;
+        cout << endl;
+    }
+}
+
+void ConsoleUI::search()
+{
+    string inp;
+
+    cout << "Do you want to search for a (p)erson or for a (c)omputer?: ";
+    cin >> inp;
+
+    if(inp == "p")
+        searchPerson();
+    else if(inp == "c")
+        searchComputer();
+}
+
+void ConsoleUI::searchPerson()
+{
+    string name;
+    cout << "Please enter a name of a person to search: ";
+    cin.ignore();
+    getline(cin, name);
+    cin.clear();
+
+    QSqlQuery query = personServ.search(name);
+    if(query.next())
+    {
+        query.previous();
+        while(query.next())
+        {
+            cout << endl;
+            cout << "Name:          " << query.value("Name").toString().toStdString() << endl;
+            cout << "Gender:        " << query.value("Gender").toString().toStdString() << endl;
+            cout << "Birth year:    " << query.value("birthYear").toString().toStdString() << endl;
+            cout << "Year of death: " << query.value("deathYear").toString().toStdString() << endl;
+            cout << endl;
+        }
+    }
+    else
+    {
+        cout << endl;
+        cout << "No matches found" << endl;
+    }
+}
+
+void ConsoleUI::searchComputer()
+{
+    string name;
+    cout << "Please enter a name of a computer to search: ";
+    cin.ignore();
+    getline(cin, name);
+    cin.clear();
+
+    QSqlQuery query = computerServ.search(name);
+    if(query.next())
+    {
+        query.previous();
+        while(query.next())
+        {
+            cout << "Name:          " << query.value("Name").toString().toStdString() << endl;
+            cout << "Year:          " << query.value("Year").toString().toStdString() << endl;
+            cout << "Type:          " << query.value("Type").toString().toStdString() << endl;
+            string made;
+            if(query.value("Made") == 0)
+                made = "No";
+            else
+                made = "Yes";
+
+            cout << "It was made:   " << made << endl;
+            cout << endl;
+        }
+    }
+    else
+    {
+        cout << endl;
+        cout << "No matches found" << endl;
+    }
 }
 
 void ConsoleUI::connect()
@@ -163,5 +276,8 @@ void ConsoleUI::connect()
     getline(cin, computer);
     cin.clear();
 
-    personServ.connect(name, computer);
+    if(personServ.connect(name, computer))
+        cout << "Connected." << endl;
+    else
+        cout << "Not connected." << endl;
 }
