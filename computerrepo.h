@@ -11,6 +11,7 @@ private:
 
 public:
     computerRepo();
+    QSqlDatabase getDatabaseConnection();
 
     void add(Computer c);
     QSqlQuery printList(int option);

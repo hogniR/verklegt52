@@ -2,9 +2,25 @@
 
 computerRepo::computerRepo()
 {
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    QString dbName = "DB.sqlite";
-    db.setDatabaseName(dbName);
+    db = getDatabaseConnection();
+}
+
+QSqlDatabase computerRepo::getDatabaseConnection()
+{
+    QSqlDatabase db;
+
+    if(QSqlDatabase::contains())
+    {
+        db = QSqlDatabase::database();
+    }
+    else
+    {
+        db = QSqlDatabase::addDatabase("QSQLITE");
+        db.setDatabaseName("DB.sqlite");
+
+        db.open();
+    }
+    return db;
 }
 
 void computerRepo::add(Computer c)
@@ -19,7 +35,6 @@ void computerRepo::add(Computer c)
     }
     db.close();
 }
-
 
 QSqlQuery computerRepo::printList(int option)
 {

@@ -2,9 +2,25 @@
 
 personRepo::personRepo()
 {
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    QString dbName = "DB.sqlite";
-    db.setDatabaseName(dbName);
+    db = getDatabaseConnection();
+}
+
+QSqlDatabase personRepo::getDatabaseConnection()
+{
+    QSqlDatabase db;
+
+    if(QSqlDatabase::contains())
+    {
+        db = QSqlDatabase::database();
+    }
+    else
+    {
+        db = QSqlDatabase::addDatabase("QSQLITE");
+        db.setDatabaseName("DB.sqlite");
+
+        db.open();
+    }
+    return db;
 }
 
 void personRepo::add(Person p)
