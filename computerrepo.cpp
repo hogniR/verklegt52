@@ -2,7 +2,6 @@
 
 computerRepo::computerRepo()
 {
-<<<<<<< HEAD
     db = getDatabaseConnection();
 }
 
@@ -22,11 +21,6 @@ QSqlDatabase computerRepo::getDatabaseConnection()
         db.open();
     }
     return db;
-=======
-    //db = QSqlDatabase::addDatabase("QSQLITE");
-    //QString dbName = "DB.sqlite";
-    //db.setDatabaseName(dbName);
->>>>>>> 5ee430367865cdd209183dfff3e923d5b8e0bd03
 }
 
 void computerRepo::add(Computer c)

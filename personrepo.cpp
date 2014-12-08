@@ -114,8 +114,7 @@ bool personRepo::connect(string name, string computer)
         else
             found = false;
     }
-    return found;
-
     db.close();
+    return found;
 }
 
