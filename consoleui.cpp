@@ -152,10 +152,11 @@ void ConsoleUI::printPersons()
     QSqlQuery query = personServ.printList(option);
     while(query.next())
     {
-        cout << "Name:          " << query.value("Name").toString().toStdString() << endl;
-        cout << "Gender:        " << query.value("Gender").toString().toStdString() << endl;
-        cout << "Birth year:    " << query.value("birthYear").toString().toStdString() << endl;
-        cout << "Year of death: " << query.value("deathYear").toString().toStdString() << endl;
+        cout << "Name:          " << query.value(0).toString().toStdString() << endl;
+        cout << "Gender:        " << query.value(1).toString().toStdString() << endl;
+        cout << "Birth year:    " << query.value(2).toString().toStdString() << endl;
+        cout << "Year of death: " << query.value(3).toString().toStdString() << endl;
+        cout << "Computer:      " << query.value(5).toString().toStdString() << endl;
         cout << endl;
     }
 }
@@ -174,11 +175,12 @@ void ConsoleUI::printComputers()
     QSqlQuery query = computerServ.printList(option);
     while(query.next())
     {
-        cout << "Name:          " << query.value("Name").toString().toStdString() << endl;
-        cout << "Year:          " << query.value("Year").toString().toStdString() << endl;
-        cout << "Type:          " << query.value("Type").toString().toStdString() << endl;
+        cout << "Name:          " << query.value(0).toString().toStdString() << endl;
+        cout << "Year:          " << query.value(1).toString().toStdString() << endl;
+        cout << "Type:          " << query.value(2).toString().toStdString() << endl;
+        cout << "Person:        " << query.value(6).toString().toStdString() << endl;
         string made;
-        if(query.value("Made") == 0)
+        if(query.value(3) == 0)
             made = "No";
         else
             made = "Yes";

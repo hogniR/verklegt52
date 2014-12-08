@@ -2,9 +2,7 @@
 
 computerRepo::computerRepo()
 {
-    //db = QSqlDatabase::addDatabase("QSQLITE");
-    //QString dbName = "DB.sqlite";
-    //db.setDatabaseName(dbName);
+
 }
 
 void computerRepo::add(Computer c)
@@ -23,20 +21,20 @@ void computerRepo::add(Computer c)
 
 QSqlQuery computerRepo::printList(int option)
 {
-    QString queryExec;
+    QString queryExec = "SELECT c.*, p.Name FROM Computer c INNER JOIN Connector o ON o.c_ID = c.ID INNER JOIN Person p ON o.p_ID = p.ID";
     switch(option)
     {
         case 1:
-            queryExec = "SELECT * FROM Computer ORDER BY Name";
+            queryExec = queryExec + " ORDER BY Name";
             break;
         case 2:
-            queryExec = "SELECT * FROM Computer ORDER BY Year";
+            queryExec = queryExec + " ORDER BY Year";
             break;
         case 3:
-            queryExec = "SELECT * FROM Computer ORDER BY Type";
+            queryExec = queryExec + " ORDER BY Type";
             break;
         case 4:
-            queryExec = "SELECT * FROM Computer ORDER BY Made";
+            queryExec = queryExec + " ORDER BY Made";
             break;
     }
 
