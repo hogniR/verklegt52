@@ -10,6 +10,7 @@ private:
     personRepo personRepository;
 public:
     void add(Person p);
+    bool connect(string name, string computer);
     QSqlQuery printList(int option);
     QSqlQuery search(string name);
 };

@@ -86,3 +86,36 @@ QSqlQuery personRepo::search(string name)
     return QSqlQuery();
 }
 
+//PRAGMA foreign_keys = ON
+bool personRepo::connect(string name, string computer)
+{
+    bool found = false;
+
+    if(db.open())
+    {
+        QSqlQuery query;
+        query.exec("SELECT * FROM Person WHERE Name LIKE '%" + QString(name.c_str()) + "%'");
+
+        if(query.next())
+        {
+            QString id_p = query.value("ID").toString();
+            found = true;
+
+            query.exec("SELECT * FROM Computer WHERE Name LIKE '%" + QString(computer.c_str()) + "%'");
+
+            if(query.next())
+            {
+                QString id_c = query.value("ID").toString();
+                query.exec("INSERT INTO Connector(p_ID, c_ID) VALUES("+ id_p +", "+ id_c +")");
+            }
+            else
+                found = false;
+        }
+        else
+            found = false;
+    }
+    return found;
+
+    db.close();
+}
+

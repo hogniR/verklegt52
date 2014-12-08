@@ -14,3 +14,7 @@ QSqlQuery personService::search(string name)
 {
     return personRepository.search(name);
 }
+
+bool personService::connect(string name, string computer){
+    return personRepository.connect(name, computer);
+}

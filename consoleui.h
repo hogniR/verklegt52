@@ -24,6 +24,7 @@ public:
     void printComputers();
 
     void search();
+    void connect();
     void searchPerson();
     void searchComputer();
 
