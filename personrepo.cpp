@@ -2,9 +2,25 @@
 
 personRepo::personRepo()
 {
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    QString dbName = "DB.sqlite";
-    db.setDatabaseName(dbName);
+    db = getDatabaseConnection();
+}
+
+QSqlDatabase personRepo::getDatabaseConnection()
+{
+    QSqlDatabase db;
+
+    if(QSqlDatabase::contains())
+    {
+        db = QSqlDatabase::database();
+    }
+    else
+    {
+        db = QSqlDatabase::addDatabase("QSQLITE");
+        db.setDatabaseName("DB.sqlite");
+
+        db.open();
+    }
+    return db;
 }
 
 void personRepo::add(Person p)
@@ -70,7 +86,6 @@ QSqlQuery personRepo::search(string name)
     return QSqlQuery();
 }
 
-//PRAGMA foreign_keys = ON
 bool personRepo::connect(string name, string computer)
 {
     bool found = false;
@@ -98,8 +113,7 @@ bool personRepo::connect(string name, string computer)
         else
             found = false;
     }
-    return found;
-
     db.close();
+    return found;
 }
 

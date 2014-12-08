@@ -178,7 +178,6 @@ void ConsoleUI::printComputers()
         cout << "Name:          " << query.value(0).toString().toStdString() << endl;
         cout << "Year:          " << query.value(1).toString().toStdString() << endl;
         cout << "Type:          " << query.value(2).toString().toStdString() << endl;
-        cout << "Person:        " << query.value(6).toString().toStdString() << endl;
         string made;
         if(query.value(3) == 0)
             made = "No";
@@ -186,6 +185,7 @@ void ConsoleUI::printComputers()
             made = "Yes";
 
         cout << "It was made:   " << made << endl;
+        cout << "Creator:       " << query.value(5).toString().toStdString() << endl;
         cout << endl;
     }
 }
