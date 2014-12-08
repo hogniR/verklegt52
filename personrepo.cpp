@@ -2,9 +2,25 @@
 
 personRepo::personRepo()
 {
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    QString dbName = "DB.sqlite";
-    db.setDatabaseName(dbName);
+    db = getDatabaseConnection();
+}
+
+QSqlDatabase personRepo::getDatabaseConnection()
+{
+    QSqlDatabase db;
+
+    if(QSqlDatabase::contains())
+    {
+        db = QSqlDatabase::database();
+    }
+    else
+    {
+        db = QSqlDatabase::addDatabase("QSQLITE");
+        db.setDatabaseName("DB.sqlite");
+
+        db.open();
+    }
+    return db;
 }
 
 void personRepo::add(Person p)
@@ -22,20 +38,20 @@ void personRepo::add(Person p)
 
 QSqlQuery personRepo::printList(int option)
 {
-    QString queryExec;
+    QString queryExec = "SELECT p.*, c.Name FROM Computer c INNER JOIN Connector o ON o.c_ID = c.ID INNER JOIN Person p ON o.p_ID = p.ID";
     switch(option)
     {
         case 1:
-            queryExec = "SELECT * FROM Person ORDER BY Name";
+            queryExec = queryExec + " ORDER BY Name";
             break;
         case 2:
-            queryExec = "SELECT * FROM Person ORDER BY Gender";
+            queryExec = queryExec + " ORDER BY Gender";
             break;
         case 3:
-            queryExec = "SELECT * FROM Person ORDER BY birthYear";
+            queryExec = queryExec + " ORDER BY birthYear";
             break;
         case 4:
-            queryExec = "SELECT * FROM Person ORDER BY deathYear";
+            queryExec = queryExec + " ORDER BY deathYear";
             break;
     }
 
@@ -70,7 +86,6 @@ QSqlQuery personRepo::search(string name)
     return QSqlQuery();
 }
 
-//PRAGMA foreign_keys = ON
 bool personRepo::connect(string name, string computer)
 {
     bool found = false;
@@ -98,8 +113,7 @@ bool personRepo::connect(string name, string computer)
         else
             found = false;
     }
-    return found;
-
     db.close();
+    return found;
 }
 
