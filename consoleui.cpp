@@ -67,12 +67,18 @@ void ConsoleUI::addPerson()
      getline(cin, p.name);
      for(unsigned int i = 0; i < p.name.size(); i++)
      {
-     if(isspace(p.name[i]) || (p.name[i] >= 65 && p.name[i] <= 90) || (p.name[i] >= 97 && p.name[i] <= 122)) valid = true;
-     else {
+
+     if(isspace(p.name[i]) || (p.name[i] >= 65 && p.name[i] <= 90) || (p.name[i] >= 97 && p.name[i] <= 122))
+
+     valid = true;
+
+     else
+          {
              valid = false;
-break;
+             break;
           }
-     if(isspace(p.name[0])) valid = false;
+
+          if(isspace(p.name[0])) valid = false;
      }
    if(valid == false) cout << "Invalid input, try again\n";
 
@@ -88,9 +94,11 @@ break;
                valid = false;
            }
        }
+
        else
        {
            valid = true;
+           break;
        }
 
 
