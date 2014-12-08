@@ -57,9 +57,50 @@ void ConsoleUI::addPerson()
 {
     Person p = Person();
 
-    cout << "Enter name: ";
-    cin.sync();
-    getline(cin, p.name);
+    cin.ignore();
+
+    bool valid = false;
+
+ do{
+
+     cout << "Enter name: ";
+     getline(cin, p.name);
+     for(unsigned int i = 0; i < p.name.size(); i++)
+     {
+     if(isspace(p.name[i]) || (p.name[i] >= 65 && p.name[i] <= 90) || (p.name[i] >= 97 && p.name[i] <= 122)) valid = true;
+     else {
+             valid = false;
+break;
+          }
+     if(isspace(p.name[0])) valid = false;
+     }
+   if(valid == false) cout << "Invalid input, try again\n";
+
+   if(valid == true) {
+
+       QSqlQuery query = personServ.searchforadd(p.name);
+       if(query.next())
+       {
+           query.previous();
+           while(query.next())
+           {
+               cout << "The name already exist in our database.\n";
+               valid = false;
+           }
+       }
+       else
+       {
+           valid = true;
+       }
+
+
+
+   }
+
+
+ }while(valid == false);
+
+
 
     //makes the first letter BIG.
     p.name[0] = toupper(p.name[0]);

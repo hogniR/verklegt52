@@ -86,6 +86,25 @@ QSqlQuery personRepo::search(string name)
     return QSqlQuery();
 }
 
+
+QSqlQuery personRepo::searchforadd(string name)
+{
+    if(db.open())
+    {
+        QSqlQuery query;
+        query.exec("SELECT * FROM Person WHERE Name LIKE '" + QString(name.c_str()) + "'");
+        if(query.next())
+        {
+            query.previous();
+            return query;
+        }
+    }
+    db.close();
+    return QSqlQuery();
+}
+
+
+
 bool personRepo::connect(string name, string computer)
 {
     bool found = false;

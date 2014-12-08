@@ -13,5 +13,6 @@ public:
     bool connect(string name, string computer);
     QSqlQuery printList(int option);
     QSqlQuery search(string name);
+    QSqlQuery searchforadd(string name);
 };
 #endif // PERSONSERVICE_H
