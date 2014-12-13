@@ -6,4 +6,5 @@ Computer::Computer()
     year = 0;
     type = "";
     made = false;
+    creator = "";
 }

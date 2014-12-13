@@ -6,6 +6,7 @@ Person::Person()
     deathYear = 0;
     gender = "";
     name = "";
+    computer = "";
 }
 
 Person::Person(string n, string g, int byear, int dyear)

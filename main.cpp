@@ -1,12 +1,11 @@
-#include "consoleui.h"
+#include "mainwindow.h"
+#include <QApplication>
 
-using namespace std;
-
-int main()
+int main(int argc, char *argv[])
 {
-    ConsoleUI ui = ConsoleUI();
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
 
-    ui.start();
-
-    return 0;
+    return a.exec();
 }

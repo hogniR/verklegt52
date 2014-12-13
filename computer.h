@@ -14,6 +14,7 @@ public:
     int year;
     string type;
     bool made;
+    string creator;
 };
 
 #endif // COMPUTER_H
