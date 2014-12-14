@@ -129,3 +129,39 @@ void MainWindow::printComputers()
 
     ui->computerTable->setRowCount(currentlyDisplayedComputers.size());
 }
+
+void MainWindow::on_addPersonButton_clicked()
+{
+    AddPersonDialog addperson;
+    addperson.exec();
+}
+
+void MainWindow::on_addComputerButton_clicked()
+{
+    addComputerDialog addcomputer;
+    addcomputer.exec();
+}
+
+void MainWindow::on_connectButton_2_clicked()
+{
+    connectDialog connectd;
+    connectd.exec();
+
+    getAllComputers();
+    getAllPersons();
+
+    printComputers();
+    printPerson();
+}
+
+void MainWindow::on_connectButton_clicked()
+{
+    connectDialog connectd;
+    connectd.exec();
+
+    getAllComputers();
+    getAllPersons();
+
+    printComputers();
+    printPerson();
+}

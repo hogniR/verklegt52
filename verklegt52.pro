@@ -19,7 +19,10 @@ SOURCES += main.cpp\
     personservice.cpp \
     computer.cpp \
     computerservice.cpp \
-    computerrepo.cpp
+    computerrepo.cpp \
+    addpersondialog.cpp \
+    addcomputerdialog.cpp \
+    connectdialog.cpp
 
 HEADERS  += mainwindow.h \
     computerrepo.h \
@@ -27,6 +30,12 @@ HEADERS  += mainwindow.h \
     personrepo.h \
     personservice.h \
     computer.h \
-    computerservice.h
+    computerservice.h \
+    addpersondialog.h \
+    addcomputerdialog.h \
+    connectdialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    addpersondialog.ui \
+    addcomputerdialog.ui \
+    connectdialog.ui

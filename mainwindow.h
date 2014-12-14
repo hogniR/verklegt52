@@ -4,6 +4,9 @@
 #include <QMainWindow>
 #include "personservice.h"
 #include "computerservice.h"
+#include "addpersondialog.h"
+#include "addcomputerdialog.h"
+#include "connectdialog.h"
 #include <vector>
 
 namespace Ui {
@@ -19,6 +22,14 @@ public:
     ~MainWindow();
 
 private slots:
+
+    void on_addPersonButton_clicked();
+
+    void on_addComputerButton_clicked();
+
+    void on_connectButton_2_clicked();
+
+    void on_connectButton_clicked();
 
 private:
     Ui::MainWindow *ui;
