@@ -31,11 +31,13 @@ private slots:
 
     void on_connectButton_2_clicked();
 
-    void on_connectButton_clicked();
-
     void on_searchPersonButton_clicked();
 
     void on_searchComputerButton_clicked();
+
+    void on_dropdownList_persons_activated(int index);
+
+    void on_dropdownList_computers_activated(int index);
 
 private:
     Ui::MainWindow *ui;
@@ -51,8 +53,8 @@ private:
     personService personServ;
     computerService computerServ;
 
-    void getAllPersons();
-    void getAllComputers();
+    void getAllPersons(int sortBy);
+    void getAllComputers(int sortBy);
     void printPerson();
     void printComputers();
     void printSearchedPerson();

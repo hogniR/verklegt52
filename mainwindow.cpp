@@ -8,8 +8,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    getAllPersons();
-    getAllComputers();
+    getAllPersons(1);
+    getAllComputers(1);
 
     printPerson();
     printComputers();
@@ -120,9 +120,11 @@ void MainWindow::printPerson()
     ui->tablePersons->setRowCount(currentlyDisplayedPersons.size());
 }
 
-void MainWindow::getAllPersons()
+void MainWindow::getAllPersons(int sortBy)
 {
-    QSqlQuery query = personServ.printList(1);
+    correntPersons.clear();
+
+    QSqlQuery query = personServ.printList(sortBy);
     while(query.next())
     {
         Person p = Person();
@@ -137,9 +139,11 @@ void MainWindow::getAllPersons()
     }
 }
 
-void MainWindow::getAllComputers()
+void MainWindow::getAllComputers(int sortBy)
 {
-    QSqlQuery query = computerServ.printList(1);
+    correntComputers.clear();
+
+    QSqlQuery query = computerServ.printList(sortBy);
     while(query.next())
     {
         Computer c = Computer();
@@ -210,20 +214,8 @@ void MainWindow::on_connectButton_2_clicked()
     connectDialog connectd;
     connectd.exec();
 
-    getAllComputers();
-    getAllPersons();
-
-    printComputers();
-    printPerson();
-}
-
-void MainWindow::on_connectButton_clicked()
-{
-    connectDialog connectd;
-    connectd.exec();
-
-    getAllComputers();
-    getAllPersons();
+    getAllComputers(1);
+    getAllPersons(1);
 
     printComputers();
     printPerson();
@@ -265,4 +257,40 @@ void MainWindow::on_searchComputerButton_clicked()
         searchedComputer.push_back(c);
     }
     printSearchedComputer();
+}
+
+void MainWindow::on_dropdownList_persons_activated(int index)
+{
+    // sort by name
+    if(index == 0)
+        getAllPersons(1);
+    // sort by gender
+    else if(index == 1)
+        getAllPersons(2);
+    // sort by birthyaer
+    else if(index == 2)
+        getAllPersons(3);
+    // sort by deathyear
+    else if(index == 3)
+        getAllPersons(4);
+
+    printPerson();
+}
+
+void MainWindow::on_dropdownList_computers_activated(int index)
+{
+    // sort by name
+    if(index == 0)
+        getAllComputers(1);
+    // sort by year
+    else if(index == 1)
+        getAllComputers(2);
+    // sort by type
+    else if(index == 2)
+        getAllComputers(3);
+    // sort by made
+    else if(index == 3)
+        getAllComputers(4);
+
+    printComputers();
 }

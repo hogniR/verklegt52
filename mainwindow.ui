@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>763</width>
-    <height>541</height>
+    <height>585</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>0</y>
+      <y>40</y>
       <width>741</width>
       <height>471</height>
      </rect>
@@ -87,32 +87,6 @@
        </rect>
       </property>
      </widget>
-     <widget class="QPushButton" name="addPersonButton">
-      <property name="geometry">
-       <rect>
-        <x>630</x>
-        <y>10</y>
-        <width>93</width>
-        <height>28</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Add person</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="connectButton_2">
-      <property name="geometry">
-       <rect>
-        <x>520</x>
-        <y>10</y>
-        <width>93</width>
-        <height>28</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Connect</string>
-      </property>
-     </widget>
      <widget class="QPushButton" name="searchPersonButton">
       <property name="geometry">
        <rect>
@@ -124,6 +98,54 @@
       </property>
       <property name="text">
        <string>Search</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="dropdownList_persons">
+      <property name="geometry">
+       <rect>
+        <x>622</x>
+        <y>10</y>
+        <width>101</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>Name</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Gender</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Year of birth</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Year of death</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLabel" name="sortByLabel">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>10</y>
+        <width>53</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Sort by:</string>
       </property>
      </widget>
     </widget>
@@ -169,32 +191,6 @@
        </property>
       </column>
      </widget>
-     <widget class="QPushButton" name="addComputerButton">
-      <property name="geometry">
-       <rect>
-        <x>630</x>
-        <y>10</y>
-        <width>93</width>
-        <height>28</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Add computer</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="connectButton">
-      <property name="geometry">
-       <rect>
-        <x>520</x>
-        <y>10</y>
-        <width>93</width>
-        <height>28</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Connect</string>
-      </property>
-     </widget>
      <widget class="QLineEdit" name="search_computer">
       <property name="geometry">
        <rect>
@@ -218,7 +214,94 @@
        <string>Search</string>
       </property>
      </widget>
+     <widget class="QComboBox" name="dropdownList_computers">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>10</y>
+        <width>101</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>Name</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Year</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Type</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>It was made</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLabel" name="sortByLabel_2">
+      <property name="geometry">
+       <rect>
+        <x>558</x>
+        <y>10</y>
+        <width>53</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Sort by:</string>
+      </property>
+     </widget>
     </widget>
+   </widget>
+   <widget class="QPushButton" name="connectButton_2">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>10</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Connect</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="addPersonButton">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>10</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Add person</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="addComputerButton">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>10</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Add computer</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -227,7 +310,7 @@
      <x>0</x>
      <y>0</y>
      <width>763</width>
-     <height>47</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
