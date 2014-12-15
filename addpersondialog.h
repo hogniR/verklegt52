@@ -4,8 +4,9 @@
 #include <QDialog>
 #include "personservice.h"
 
-namespace Ui {
-class AddPersonDialog;
+namespace Ui
+{
+    class AddPersonDialog;
 }
 
 class AddPersonDialog : public QDialog

@@ -4,8 +4,9 @@
 #include <QDialog>
 #include "computerservice.h"
 
-namespace Ui {
-class addComputerDialog;
+namespace Ui
+{
+    class addComputerDialog;
 }
 
 class addComputerDialog : public QDialog

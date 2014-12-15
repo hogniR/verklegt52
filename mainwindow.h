@@ -9,8 +9,9 @@
 #include "connectdialog.h"
 #include <vector>
 
-namespace Ui {
-class MainWindow;
+namespace Ui
+{
+    class MainWindow;
 }
 
 class MainWindow : public QMainWindow
@@ -20,6 +21,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
 
 private slots:
 
@@ -31,14 +33,18 @@ private slots:
 
     void on_connectButton_clicked();
 
+    void on_searchButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 
     std::vector<Person> correntPersons;
     std::vector<Person> currentlyDisplayedPersons;
+    std::vector<Person> searchedPerson;
 
     std::vector<Computer> correntComputers;
     std::vector<Computer> currentlyDisplayedComputers;
+    std::vector<Computer> searchedComputer;
 
     personService personServ;
     computerService computerServ;
@@ -47,6 +53,7 @@ private:
     void getAllComputers();
     void printPerson();
     void printComputers();
+    void printSearchedPerson();
 };
 
 #endif // MAINWINDOW_H

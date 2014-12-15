@@ -20,6 +20,36 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::printSearchedPerson()
+{
+    ui->tablePersons->clearContents();
+    ui->tablePersons->setRowCount(searchedPerson.size());
+    currentlyDisplayedPersons.clear();
+
+    for(unsigned int i = 0; i < searchedPerson.size(); i++)
+    {
+        Person searched_person = searchedPerson[i];
+
+        QString name = QString::fromStdString(searched_person.name);
+        QString gender = QString::fromStdString(searched_person.gender);
+        QString birthyear = QString::number(searched_person.birthYear);
+        QString deathyear = QString::number(searched_person.deathYear);
+        QString computer = QString::fromStdString(searched_person.computer);
+
+        int currentRow = currentlyDisplayedPersons.size();
+
+        ui->tablePersons->setItem(currentRow, 0, new QTableWidgetItem(name));
+        ui->tablePersons->setItem(currentRow, 1, new QTableWidgetItem(gender));
+        ui->tablePersons->setItem(currentRow, 2, new QTableWidgetItem(birthyear));
+        ui->tablePersons->setItem(currentRow, 3, new QTableWidgetItem(deathyear));
+        ui->tablePersons->setItem(currentRow, 4, new QTableWidgetItem(computer));
+
+        currentlyDisplayedPersons.push_back(searched_person);
+    }
+
+    ui->tablePersons->setRowCount(currentlyDisplayedPersons.size());
+}
+
 void MainWindow::printPerson()
 {
     ui->tablePersons->clearContents();
@@ -55,9 +85,7 @@ void MainWindow::printPerson()
 
 void MainWindow::getAllPersons()
 {
-    int option = 1;
-
-    QSqlQuery query = personServ.printList(option);
+    QSqlQuery query = personServ.printList(1);
     while(query.next())
     {
         Person p = Person();
@@ -74,9 +102,7 @@ void MainWindow::getAllPersons()
 
 void MainWindow::getAllComputers()
 {
-    int option = 1;
-
-    QSqlQuery query = computerServ.printList(option);
+    QSqlQuery query = computerServ.printList(1);
     while(query.next())
     {
         Computer c = Computer();
@@ -165,3 +191,23 @@ void MainWindow::on_connectButton_clicked()
     printComputers();
     printPerson();
 }
+
+void MainWindow::on_searchButton_clicked()
+{
+    QSqlQuery query = personServ.search(ui->search_person->text().toStdString());
+
+    while(query.next())
+    {
+        Person p = Person();
+
+        p.name = query.value(0).toString().toStdString();
+        p.gender = query.value(1).toString().toStdString();
+        p.birthYear = query.value(2).toInt();
+        p.deathYear = query.value(3).toInt();
+        p.computer = query.value(5).toString().toStdString();
+
+        searchedPerson.push_back(p);
+    }
+    printSearchedPerson();
+}
+
