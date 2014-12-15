@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="Persons">
      <attribute name="title">
@@ -113,7 +113,7 @@
        <string>Connect</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="searchButton">
+     <widget class="QPushButton" name="searchPersonButton">
       <property name="geometry">
        <rect>
         <x>250</x>
@@ -193,6 +193,29 @@
       </property>
       <property name="text">
        <string>Connect</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="search_computer">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>231</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="searchComputerButton">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>10</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Search</string>
       </property>
      </widget>
     </widget>

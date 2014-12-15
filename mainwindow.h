@@ -33,7 +33,9 @@ private slots:
 
     void on_connectButton_clicked();
 
-    void on_searchButton_clicked();
+    void on_searchPersonButton_clicked();
+
+    void on_searchComputerButton_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -54,6 +56,7 @@ private:
     void printPerson();
     void printComputers();
     void printSearchedPerson();
+    void printSearchedComputer();
 };
 
 #endif // MAINWINDOW_H

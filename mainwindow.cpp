@@ -50,6 +50,43 @@ void MainWindow::printSearchedPerson()
     ui->tablePersons->setRowCount(currentlyDisplayedPersons.size());
 }
 
+
+void MainWindow::printSearchedComputer()
+{
+    ui->computerTable->clearContents();
+    ui->computerTable->setRowCount(searchedComputer.size());
+    currentlyDisplayedComputers.clear();
+
+    for(unsigned int i = 0; i < searchedComputer.size(); i++)
+    {
+        Computer current_computer = searchedComputer[i];
+
+        QString name = QString::fromStdString(current_computer.name);
+        QString year = QString::number(current_computer.year);
+        QString type = QString::fromStdString(current_computer.type);
+        QString creator = QString::fromStdString(current_computer.creator);
+        QString made;
+
+        if(current_computer.made == true)
+            made = "Yes";
+        else
+            made = "No";
+
+        int currentRow = currentlyDisplayedComputers.size();
+
+        ui->computerTable->setItem(currentRow, 0, new QTableWidgetItem(name));
+        ui->computerTable->setItem(currentRow, 1, new QTableWidgetItem(year));
+        ui->computerTable->setItem(currentRow, 2, new QTableWidgetItem(type));
+        ui->computerTable->setItem(currentRow, 3, new QTableWidgetItem(made));
+        ui->computerTable->setItem(currentRow, 4, new QTableWidgetItem(creator));
+
+        currentlyDisplayedComputers.push_back(current_computer);
+    }
+
+    ui->computerTable->setRowCount(currentlyDisplayedComputers.size());
+}
+
+
 void MainWindow::printPerson()
 {
     ui->tablePersons->clearContents();
@@ -192,10 +229,10 @@ void MainWindow::on_connectButton_clicked()
     printPerson();
 }
 
-void MainWindow::on_searchButton_clicked()
+void MainWindow::on_searchPersonButton_clicked()
 {
     QSqlQuery query = personServ.search(ui->search_person->text().toStdString());
-
+    searchedPerson.clear();
     while(query.next())
     {
         Person p = Person();
@@ -211,3 +248,21 @@ void MainWindow::on_searchButton_clicked()
     printSearchedPerson();
 }
 
+void MainWindow::on_searchComputerButton_clicked()
+{
+    QSqlQuery query = computerServ.search(ui->search_computer->text().toStdString());
+    searchedComputer.clear();
+    while(query.next())
+    {
+        Computer c = Computer();
+
+        c.name = query.value(0).toString().toStdString();
+        c.year = query.value(1).toInt();
+        c.type = query.value(2).toString().toStdString();
+        c.made = query.value(3).toInt();
+        c.creator = query.value(5).toString().toStdString();
+
+        searchedComputer.push_back(c);
+    }
+    printSearchedComputer();
+}
