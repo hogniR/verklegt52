@@ -18,9 +18,13 @@ void AddPersonDialog::on_addButton_clicked()
     Person p = Person();
 
     p.name = ui->inputName->text().toStdString();
-    p.gender = ui->inputGender->text().toStdString();
     p.birthYear = ui->inputBirthyear->text().toInt();
     p.deathYear = ui->inputDeathyear->text().toInt();
+
+    if(ui->Male_radioButton->isChecked())
+        p.gender = "Male";
+    else if(ui->Female_radioButton->isChecked())
+        p.gender = "Female";
 
     personServ.add(p);
 

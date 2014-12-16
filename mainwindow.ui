@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="Persons">
      <attribute name="title">
@@ -38,6 +38,9 @@
         <width>721</width>
         <height>381</height>
        </rect>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
       </property>
       <attribute name="horizontalHeaderCascadingSectionResizes">
        <bool>false</bool>
@@ -161,6 +164,9 @@
         <width>721</width>
         <height>381</height>
        </rect>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
       </property>
       <attribute name="horizontalHeaderStretchLastSection">
        <bool>true</bool>

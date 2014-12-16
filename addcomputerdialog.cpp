@@ -20,7 +20,11 @@ void addComputerDialog::on_addButton_clicked()
     c.name = ui->inputName->text().toStdString();
     c.year = ui->inputYear->text().toInt();
     c.type = ui->inputType->text().toStdString();
-    c.made = ui->inputMade->text().toInt();
+
+    if(ui->Yes_radioButton->isChecked())
+        c.made = 1;
+    else if(ui->No_radioButton->isChecked())
+        c.made = 0;
 
     computerServ.add(c);
 
